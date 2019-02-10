@@ -61,6 +61,7 @@
     "axios": "^0.18.0",
     "concat-stream": "^2.0.0",
     "datauri-stream": "^1.0.3",
+    "electron-log": "^3.0.1",
     "tmp": "^0.0.33",
     "vue": "^2.5.16",
     "vue-electron": "^1.0.6",

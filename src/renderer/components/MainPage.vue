@@ -12,6 +12,7 @@
                     :key="dev"
                     :class="{selected: selectedId == dev}"
                     class="list-item"
+                    @click="() => selectDevice(dev)"
                   >
                     <v-list-tile-content>
                       <v-list-tile-title>{{dev}}</v-list-tile-title>

@@ -2,6 +2,7 @@
 
 import { app, BrowserWindow, ipcMain } from 'electron'
 import Adb from './adb'
+import log from 'electron-log'
 
 /**
  * Set `__static` path to static files in production
@@ -23,6 +24,7 @@ function createWindow() {
   /**
    * Initial window options
    */
+  log.info('Start')
   mainWindow = new BrowserWindow({
     height: 563,
     useContentSize: true,
@@ -47,9 +49,13 @@ function createWindow() {
   })
 
   ipcMain.on('screencap', (event, id) => {
-    adb.screencapFile(id).then(path => {
-      event.sender.send('screencap-result', path)
-    })
+    log.info(`screencap ${id}`)
+    adb
+      .screencapFile(id)
+      .then(path => {
+        event.sender.send('screencap-result', path)
+      })
+      .catch(log.error)
   })
 }
 

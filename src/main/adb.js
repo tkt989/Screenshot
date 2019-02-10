@@ -30,13 +30,15 @@ export default class Adb {
   screencapFile(id) {
     let screencapFile = tmp.fileSync().name
     return new Promise((resolve, reject) => {
-      this.screencap(id).then(stream => {
-        let dest = fs.createWriteStream(screencapFile, 'utf8')
-        stream.on('finish', () => {
-          resolve(screencapFile)
+      this.screencap(id)
+        .then(stream => {
+          let dest = fs.createWriteStream(screencapFile, 'utf8')
+          stream.on('finish', () => {
+            resolve(screencapFile)
+          })
+          stream.pipe(dest)
         })
-        stream.pipe(dest)
-      })
+        .catch(reject)
     })
   }
 
